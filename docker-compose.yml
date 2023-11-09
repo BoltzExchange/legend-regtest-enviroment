@@ -6,7 +6,7 @@ services:
       - elementsd
       - bitcoind
     restart: always
-    image: boltz/boltz:3.3.0
+    image: boltz/boltz:latest
     ports:
       - 9000:9000
       - 9001:9001
