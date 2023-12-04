@@ -22,7 +22,7 @@ mempool-tx() {
 }
 
 mempool-liquid-tx() {
-  curl localhost:8091/api/address/"$1" | jq .
+  curl localhost:8091/api/tx/"$1" | jq .
 }
 
 # args(i, cmd)
