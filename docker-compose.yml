@@ -242,7 +242,7 @@ services:
       - elementsd
       - mempool-db-liquid
       - electrs-liquid
-    image: mempool/backend-fix
+    image: mempool/backend:latest
     environment:
       BACKEND_HTTP_PORT: 8998
       MEMPOOL_NETWORK: liquid
@@ -273,7 +273,7 @@ services:
       MYSQL_ROOT_PASSWORD: admin
     image: mariadb:10.5.8
 
-  mempool-web:
+  mempool-api-proxy:
     restart: always
     depends_on:
       - mempool-api-liquid
@@ -283,6 +283,39 @@ services:
       - ./data/electrs:/data/.electrs
       - ./data/electrs-liquid:/data/.electrs-liquid
     ports:
-      - 8090:8090
-      - 8091:8091
+      - 8190:8190
+      - 8191:8191
 
+  mempool-web:
+    restart: always
+    depends_on:
+      - mempool-api
+    environment:
+      FRONTEND_HTTP_PORT: 8090
+        # BACKEND_MAINNET_HTTP_HOST: mempool-api
+      BACKEND_MAINNET_HTTP_PORT: 8190
+        # NGINX_HOST: mempool-api
+        # NGINX_PORT: 8999
+      LIQUID_ENABLED: true
+      LIQUID_WEBSITE_URL: http://localhost:8091
+    image: mempool/frontend:latest
+    ports:
+      - 8090:8090
+
+  mempool-web-liquid:
+    restart: always
+    depends_on:
+      - mempool-api-liquid
+    environment:
+      BASE_MODULE: liquid
+      LIQUID_ENABLED: true
+      BISQ_ENABLED: false
+      MEMPOOL_WEBSITE_URL: http://localhost:8090
+      FRONTEND_HTTP_PORT: 8091
+        # BACKEND_MAINNET_HTTP_HOST: mempool-api-liquid
+      BACKEND_MAINNET_HTTP_PORT: 8191
+        # NGINX_HOST: mempool-api-liquid
+        # NGINX_PORT: 8998
+    image: mempool/frontend:latest
+    ports:
+      - 8091:8091
