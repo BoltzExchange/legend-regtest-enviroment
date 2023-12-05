@@ -274,8 +274,10 @@ services:
     image: mariadb:10.5.8
 
   mempool-api-proxy:
+    hostname: mempool-api-proxy
     restart: always
     depends_on:
+      - mempool-api
       - mempool-api-liquid
     image: nginx:latest
     volumes:
@@ -287,17 +289,18 @@ services:
       - 8191:8191
 
   mempool-web:
+    hostname: mempool-web
     restart: always
     depends_on:
       - mempool-api
     environment:
       FRONTEND_HTTP_PORT: 8090
-        # BACKEND_MAINNET_HTTP_HOST: mempool-api
+      BACKEND_MAINNET_HTTP_HOST: mempool-api-proxy
       BACKEND_MAINNET_HTTP_PORT: 8190
-        # NGINX_HOST: mempool-api
-        # NGINX_PORT: 8999
       LIQUID_ENABLED: true
       LIQUID_WEBSITE_URL: http://localhost:8091
+      NGINX_HOST: mempool-api
+      NGINX_PORT: 8090
     image: mempool/frontend:latest
     ports:
       - 8090:8090
@@ -312,10 +315,10 @@ services:
       BISQ_ENABLED: false
       MEMPOOL_WEBSITE_URL: http://localhost:8090
       FRONTEND_HTTP_PORT: 8091
-        # BACKEND_MAINNET_HTTP_HOST: mempool-api-liquid
+      BACKEND_MAINNET_HTTP_HOST: mempool-api-proxy
       BACKEND_MAINNET_HTTP_PORT: 8191
-        # NGINX_HOST: mempool-api-liquid
-        # NGINX_PORT: 8998
+      NGINX_HOST: mempool-api-liquid
+      NGINX_PORT: 8091
     image: mempool/frontend:latest
     ports:
       - 8091:8091
