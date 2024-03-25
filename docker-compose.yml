@@ -177,7 +177,8 @@ services:
     expose:
       - 8081
       - 9735
-      - 10009
+    ports:
+      - 11009:10009
     volumes:
       - ./data/lnd-2:/root/.lnd/
     volumes_from:
