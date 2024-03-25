@@ -56,8 +56,9 @@ services:
     expose:
       - 29000
       - 29001
-      - 18443
       - 18444
+    ports:
+      - 18443:18443
     volumes:
       - ./data/bitcoin:/root/.bitcoin
 
@@ -68,10 +69,11 @@ services:
     depends_on:
       - bitcoind
     expose:
-      - 18884
       - 31000
       - 31001
       - 31002
+    ports:
+      - 18884:18884
     volumes:
       - ./data/elements/elements.conf:/home/elements/.elements/elements.conf
 
@@ -112,8 +114,6 @@ services:
       - --bind-addr=0.0.0.0:9735
       - --bitcoin-rpcconnect=bitcoind
       - --bitcoin-rpcport=18443
-      - --bitcoin-rpcuser=regtest
-      - --bitcoin-rpcpassword=regtest
       - --grpc-port=9736
       - --dev-bitcoind-poll=3
     expose:
@@ -121,6 +121,8 @@ services:
       - 9736
     volumes:
       - ./data/clightning-2:/root/.lightning/
+    volumes_from:
+      - bitcoind:ro
 
   lnd-1:
     hostname: lnd-1
