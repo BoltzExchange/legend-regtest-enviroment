@@ -20,12 +20,12 @@ services:
     hostname: boltz-client
     depends_on:
       - clightning-2
-      - elementsd
-      - bitcoind
+      - boltz
     restart: always
     image: boltz/boltz-client:latest
     ports:
       - 9002:9002
+      - 9003:9003
     volumes:
       - ./data/clightning-2:/root/.lightning/
       - ./data/boltz-client/:/root/.boltz/

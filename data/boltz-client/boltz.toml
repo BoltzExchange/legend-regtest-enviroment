@@ -23,8 +23,8 @@ certchain =  "/root/.lightning/regtest/client.pem"
 
 
 [RPC]
-# Host o.f
-host = "127.0.0.1"
+# Host of
+host = "boltz-client"
 
 # Port of the gRPC interface
 port = 9002
@@ -33,7 +33,7 @@ port = 9002
 restDisabled = false
 
 # Host of the REST proxy
-restHost = "127.0.0.1"
+restHost = "boltz-client"
 
 # Port of the REST proxy
 restPort = 9003
@@ -43,9 +43,10 @@ tlsCert = ""
 
 # Path to the TLS private key for the gRPC and REST interface
 tlsKey = ""
+noTls = true
 
 # Whether the macaroon authentication for the gRPC and REST interface should be disabled
-noMacaroons = false
+noMacaroons = true
 
 # Path to the admin macaroon for the gRPC and REST interface
 adminMacaroonPath = ""
