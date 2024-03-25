@@ -9,7 +9,7 @@ elements-cli-sim() {
   docker exec regtest-elementsd-1 elements-cli "$@"
 }
 
-boltz-cli-sim() {
+boltzcli-sim() {
   docker exec regtest-boltz-client-1 boltzcli "$@"
 }
 
@@ -96,9 +96,9 @@ regtest-start-log(){
 regtest-stop(){
   docker compose down --volumes
   # clean up lightning node data
-  sudo rm -rf ./data/clightning-1 ./data/lnd-1  ./data/lnd-2 ./data/boltz/boltz.db ./data/elements/liquidregtest ./data/bitcoin/regtest
+  sudo rm -rf ./data/clightning-1 ./data/clightning-2 ./data/lnd-1  ./data/lnd-2 ./data/boltz/boltz.db ./data/elements/liquidregtest ./data/bitcoin/regtest
   # recreate lightning node data folders preventing permission errors
-  mkdir ./data/clightning-1 ./data/lnd-1 ./data/lnd-2
+  mkdir ./data/clightning-1 ./data/clightning-2 ./data/lnd-1 ./data/lnd-2
 }
 
 regtest-restart(){
@@ -135,6 +135,7 @@ regtest-init(){
 
 lightning-sync(){
   wait-for-clightning-sync 1
+  wait-for-clightning-sync 2
   wait-for-lnd-sync 1
   wait-for-lnd-sync 2
 }
@@ -143,6 +144,7 @@ lightning-init(){
   # create 10 UTXOs for each node
   for i in 0 1 2 3 4; do
     fund_clightning_node 1
+    fund_clightning_node 2
     fund_lnd_node 1
     fund_lnd_node 2
   done

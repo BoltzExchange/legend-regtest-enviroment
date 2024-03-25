@@ -28,7 +28,7 @@ services:
       - 9002:9002
     volumes:
       - ./data/clightning-2:/data/clightning/
-      - ./data/boltz/:/root/.boltz/
+      - ./data/boltz-client/:/root/.boltz/
       - ./data/elements/:/root/.elements/
 
   anvil:
@@ -109,17 +109,16 @@ services:
       - --large-channels
       - --network
       - regtest
-      - --bind-addr=0.0.0.0:9737
+      - --bind-addr=0.0.0.0:9735
       - --bitcoin-rpcconnect=bitcoind
       - --bitcoin-rpcport=18443
       - --bitcoin-rpcuser=regtest
       - --bitcoin-rpcpassword=regtest
-      - --grpc-port=9738
+      - --grpc-port=9736
       - --dev-bitcoind-poll=3
     expose:
-      - 9737
-    ports:
-      - 9738:9738
+      - 9735
+      - 9736
     volumes:
       - ./data/clightning-2:/root/.lightning/
 
