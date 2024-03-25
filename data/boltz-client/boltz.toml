@@ -1,39 +1,25 @@
 # Path the the log file
 logfile = ""
 
-electrumUrl = "localhost:19001"
-electrumLiquidUrl = "localhost:19002"
+electrumUrl = "electrs:19001"
+electrumLiquidUrl = "electrs-liquid:19002"
 
 [BOLTZ]
 # By default the daemon automatically connects to the official Boltz instance for the network LND is on
 # This value is used to override that
-url = ""
+url = "http://boltz:9001"
 
 [DATABASE]
 # Path to the SQLite database file
 # path = "/home/michael/test.db"
 
-[LND]
-# Host of the gRPC interface of LND
-host = "127.0.0.1"
-
-# Port of the gRPC interface of LND
-port = 10009
-
-# Path to a macaroon file of LND
-# The daemon needs to have permission to read various endpoints, generate addresses and pay invoices
-macaroon = "~/regtest/data/lnd-1/data/chain/bitcoin/regtest/admin.macaroon"
-
-# Path to the TLS certificate of LND
-certificate = "~/regtest/data/lnd-1/tls.cert"
-
 [CLN]
-host = "127.0.0.1"
+host = "clightning-2"
 port = 9736
 
-rootcert = "~/regtest/data/clightning-1/regtest/ca.pem"
-privatekey = "~/regtest/data/clightning-1/regtest/client-key.pem"
-certchain =  "~/regtest/data/clightning-1/regtest/client.pem"
+rootcert = "/root/.lightning/regtest/ca.pem"
+privatekey = "/root/.lightning/regtest/client-key.pem"
+certchain =  "/root/.lightning/regtest/client.pem"
 
 
 [RPC]

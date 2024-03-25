@@ -27,7 +27,7 @@ services:
     ports:
       - 9002:9002
     volumes:
-      - ./data/clightning-2:/data/clightning/
+      - ./data/clightning-2:/root/.lightning/
       - ./data/boltz-client/:/root/.boltz/
       - ./data/elements/:/root/.elements/
 
