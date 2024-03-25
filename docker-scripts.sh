@@ -10,7 +10,7 @@ elements-cli-sim() {
 }
 
 boltzcli-sim() {
-  docker exec regtest-boltz-client-1 boltzcli "$@"
+  docker exec -it regtest-boltz-client-1 boltzcli "$@"
 }
 
 bitcoin-address() {
