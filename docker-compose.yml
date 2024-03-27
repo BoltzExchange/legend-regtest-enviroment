@@ -54,11 +54,11 @@ services:
       - -rpcallowip=0.0.0.0/0
       - -rpcbind=0.0.0.0
     expose:
-      - 29000
-      - 29001
       - 18444
     ports:
       - 18443:18443
+      - 29000:29000
+      - 29001:29001
     volumes:
       - ./data/bitcoin:/root/.bitcoin
 
@@ -69,10 +69,10 @@ services:
     depends_on:
       - bitcoind
     expose:
-      - 31000
       - 31001
-      - 31002
     ports:
+      - 31000:31000
+      - 31002:31002
       - 18884:18884
     volumes:
       - ./data/elements/elements.conf:/home/elements/.elements/elements.conf
