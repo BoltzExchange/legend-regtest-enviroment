@@ -7,7 +7,7 @@ services:
       - bitcoind
       - anvil
     restart: always
-    image: boltz/boltz:latest
+    image: boltz/boltz:chain-swaps
     ports:
       - 9000:9000
       - 9001:9001
